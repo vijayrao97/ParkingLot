@@ -3,29 +3,21 @@ package models;
 import java.util.List;
 
 public class ParkingLot extends BaseModel {
-    private List<Floor> parkingFloor;
-    private List<Gate> gates;
+    private int capacity;
     private String name;
     private String address;
+    private List<Floor> floors;
+    private List<Slot> slots;
     private List<VehicleType> allowedVehicles;
-    private int capacity;
     private ParkingLotStatus parkingLotStatus;
-    private SlotAssignmentStrategy slotAssignmentStrategy;
+    private SlotAssignmentStrategyEnum slotAssignmentStrategyEnum;
 
-    public List<Floor> getParkingFloor() {
-        return parkingFloor;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setParkingFloor(List<Floor> parkingFloor) {
-        this.parkingFloor = parkingFloor;
-    }
-
-    public List<Gate> getGates() {
-        return gates;
-    }
-
-    public void setGates(List<Gate> gates) {
-        this.gates = gates;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public String getName() {
@@ -44,20 +36,28 @@ public class ParkingLot extends BaseModel {
         this.address = address;
     }
 
+    public List<Floor> getFloors() {
+        return floors;
+    }
+
+    public void setFloors(List<Floor> floors) {
+        this.floors = floors;
+    }
+
+    public List<Slot> getSlots() {
+        return slots;
+    }
+
+    public void setSlots(List<Slot> slots) {
+        this.slots = slots;
+    }
+
     public List<VehicleType> getAllowedVehicles() {
         return allowedVehicles;
     }
 
     public void setAllowedVehicles(List<VehicleType> allowedVehicles) {
         this.allowedVehicles = allowedVehicles;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
     }
 
     public ParkingLotStatus getParkingLotStatus() {
@@ -68,11 +68,11 @@ public class ParkingLot extends BaseModel {
         this.parkingLotStatus = parkingLotStatus;
     }
 
-    public SlotAssignmentStrategy getSlotAssignmentStrategy() {
-        return slotAssignmentStrategy;
+    public SlotAssignmentStrategyEnum getSlotAssignmentStrategyEnum() {
+        return slotAssignmentStrategyEnum;
     }
 
-    public void setSlotAssignmentStrategy(SlotAssignmentStrategy slotAssignmentStrategy) {
-        this.slotAssignmentStrategy = slotAssignmentStrategy;
+    public void setSlotAssignmentStrategyEnum(SlotAssignmentStrategyEnum slotAssignmentStrategyEnum) {
+        this.slotAssignmentStrategyEnum = slotAssignmentStrategyEnum;
     }
 }

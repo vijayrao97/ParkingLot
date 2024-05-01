@@ -4,35 +4,35 @@ import java.util.Date;
 import java.util.List;
 
 public class Bill extends BaseModel {
-    private Date exitTime;
-    private Ticket Token;
-    private Gate exitAt;
+    private Date exitDate;
+    private Ticket token;
+    private Gate ExitedAt;
     private List<Payment> payments;
     private int totalAmount;
     private BillStatus billStatus;
 
-    public Date getExitTime() {
-        return exitTime;
+    public Date getExitDate() {
+        return exitDate;
     }
 
-    public void setExitTime(Date exitTime) {
-        this.exitTime = exitTime;
+    public void setExitDate(Date exitDate) {
+        this.exitDate = exitDate;
     }
 
     public Ticket getToken() {
-        return Token;
+        return token;
     }
 
     public void setToken(Ticket token) {
-        Token = token;
+        this.token = token;
     }
 
-    public Gate getExitAt() {
-        return exitAt;
+    public Gate getExitedAt() {
+        return ExitedAt;
     }
 
-    public void setExitAt(Gate exitAt) {
-        this.exitAt = exitAt;
+    public void setExitedAt(Gate exitedAt) {
+        ExitedAt = exitedAt;
     }
 
     public List<Payment> getPayments() {
