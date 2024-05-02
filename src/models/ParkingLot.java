@@ -7,7 +7,7 @@ public class ParkingLot extends BaseModel {
     private String name;
     private String address;
     private List<Floor> floors;
-    private List<Slot> slots;
+    private List<Gate> gates;
     private List<VehicleType> allowedVehicles;
     private ParkingLotStatus parkingLotStatus;
     private SlotAssignmentStrategyEnum slotAssignmentStrategyEnum;
@@ -44,12 +44,12 @@ public class ParkingLot extends BaseModel {
         this.floors = floors;
     }
 
-    public List<Slot> getSlots() {
-        return slots;
+    public List<Gate> getGates() {
+        return gates;
     }
 
-    public void setSlots(List<Slot> slots) {
-        this.slots = slots;
+    public void setGates(List<Gate> gates) {
+        this.gates = gates;
     }
 
     public List<VehicleType> getAllowedVehicles() {
