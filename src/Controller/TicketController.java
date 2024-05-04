@@ -9,18 +9,25 @@ public class TicketController {
     private TokenService tokenService;
 
     public TicketController(TokenService tokenService){
-        this.tokenService = new TokenService();
+        this.tokenService = tokenService;
     }
 
     public IssueTicketResponse IssueTicket(IssueTicketRequest request){
         IssueTicketResponse response = new IssueTicketResponse();
         try{
-            Ticket t = new Ticket();
+            Ticket t = tokenService.IssueTicket(request.getVehicleNo(),request.getOwnerName(),
+                    request.getGateId(), request.getVehicleType());
+            response.setSlot(t.getSlot());
+            response.setStatusCode("Success");
+            response.setTicketNumber(t.getEntryTime());
+            response.setVehicle(t.getVehicle());
+            response.setTicketNumber(t.getNumber());
         }
         catch(Exception e){
-
+            response.setStatusCode("Failure");
+            response.setFailureString(e.toString());
         }
-        return null;
+        return response;
     }
 
 }
