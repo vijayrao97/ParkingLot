@@ -46,11 +46,13 @@ public class Main {
         Slot s1 = new Slot();
         s1.setSlotNumber(1);
         s1.setParkingFloor(f1);
+        s1.setVehicleType(VehicleType.CAR);
         s1.setSlotStatus(SlotStatus.EMPTY);
 
         Slot s2 = new Slot();
         s2.setSlotNumber(2);
         s2.setParkingFloor(f1);
+        s2.setVehicleType(VehicleType.CAR);
         s2.setSlotStatus(SlotStatus.EMPTY);
 
         f1.setParkingSlotsList(List.of(s1,s2));
@@ -94,6 +96,34 @@ public class Main {
         // RESPONSE DTO..
         IssueTicketResponse response = ticketController.IssueTicket(request);
         System.out.println(response.getVehicle().getVehicleType());
+
+        IssueTicketRequest request1 = new IssueTicketRequest();
+
+        request1.setGateId(1);
+        request1.setOwnerName("abc");
+        request1.setVehicleNo("124");
+        request1.setVehicleType(VehicleType.CAR);
+
+        // RESPONSE DTO..
+        IssueTicketResponse response1 = ticketController.IssueTicket(request1);
+        if( response1 != null ){
+            System.out.println(response1.getSlot().getVehicleType());
+        }
+
+
+        IssueTicketRequest request2 = new IssueTicketRequest();
+
+        request2.setGateId(1);
+        request2.setOwnerName("abc");
+        request2.setVehicleNo("124");
+        request2.setVehicleType(VehicleType.CAR);
+
+        // RESPONSE DTO..
+        IssueTicketResponse response2 = ticketController.IssueTicket(request2);
+        if( response2 != null ){
+            System.out.println(response2.getSlot());
+        }
+
         // BILL GENERATE..
 
     }

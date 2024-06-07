@@ -49,16 +49,19 @@ public class TokenService {
         else{
             v = vehicleOptional.get();
         }
+
         t.setVehicle(v);
-//        System.out.println("Working line 2 : "+v.getOwnerName());
-//        System.out.println(g.getParkingLot().getSlotAssignmentStrategyEnum());
         SlotAssignmentStratergy stratergy = getSlotFactory.getSlotStrategy(g.getParkingLot().getSlotAssignmentStrategyEnum());
+
         if( stratergy == null ){
             throw new RuntimeException("Strategy implementation missing.");
         }
+//        System.out.println("Working fine1.");
         Optional<Slot> slotOptional = stratergy.getSlot(vehicleType,g);
+//        System.out.println("Working fine2.");
 
         if( slotOptional.isEmpty() ){
+            System.out.println("Working fine.");
             throw new RuntimeException("No empty slot available");
         }
         Slot s  = slotOptional.get();
