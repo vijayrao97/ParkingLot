@@ -5,6 +5,7 @@ import Services.TokenService;
 import models.*;
 import repo.*;
 
+import java.util.Date;
 import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -125,6 +126,14 @@ public class Main {
         }
 
         // BILL GENERATE..
+//        Bill b1 = new Bill();
+//        b1.setExitDate(new Date());
+//        b1.setExitedAt(g2);
+//        b1.setBillStatus(BillStatus.PENDING);
+//        b1.setTotalAmount(100);
+
+
+
 
     }
 }
