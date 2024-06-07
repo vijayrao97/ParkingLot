@@ -17,7 +17,7 @@ public class Ticket extends BaseModel {
         this.number = number;
     }
 
-    public String getEntryTime() {
+    public Date getEntryTime() {
         return entryTime;
     }
 

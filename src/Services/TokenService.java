@@ -30,13 +30,13 @@ public class TokenService {
         Ticket t = new Ticket();
         t.setEntryTime(new Date());
         Optional<Gate> gateOptional = gateRepo.findGateById(gateId);
+
         if( gateOptional.isEmpty() ){
             System.out.println("Gate is empty");
             return null;
         }
         Gate g = gateOptional.get();
         t.setGate(g);
-
         Vehicle v;
         Optional<Vehicle> vehicleOptional = vehicleRepo.findVehicleByNumber(vehicleNumber);
         if( vehicleOptional.isEmpty() ){
@@ -50,17 +50,20 @@ public class TokenService {
             v = vehicleOptional.get();
         }
         t.setVehicle(v);
-
+//        System.out.println("Working line 2 : "+v.getOwnerName());
+//        System.out.println(g.getParkingLot().getSlotAssignmentStrategyEnum());
         SlotAssignmentStratergy stratergy = getSlotFactory.getSlotStrategy(g.getParkingLot().getSlotAssignmentStrategyEnum());
         if( stratergy == null ){
             throw new RuntimeException("Strategy implementation missing.");
         }
         Optional<Slot> slotOptional = stratergy.getSlot(vehicleType,g);
+
         if( slotOptional.isEmpty() ){
             throw new RuntimeException("No empty slot available");
         }
         Slot s  = slotOptional.get();
         t.setSlot(s);
+
         slotRepo.updateSlot(s,SlotStatus.FILLED);
         parkingLotRepo.updateCountById(g.getParkingLot());
         Ticket finalTicketWithId = ticketRepo.saveTicket(t);

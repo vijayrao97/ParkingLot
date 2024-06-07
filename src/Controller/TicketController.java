@@ -19,7 +19,7 @@ public class TicketController {
                     request.getGateId(), request.getVehicleType());
             response.setSlot(t.getSlot());
             response.setStatusCode("Success");
-            response.setTicketNumber(t.getEntryTime());
+            response.setEntryTime(t.getEntryTime());
             response.setVehicle(t.getVehicle());
             response.setTicketNumber(t.getNumber());
         }
