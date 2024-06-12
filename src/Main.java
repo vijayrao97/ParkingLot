@@ -1,6 +1,10 @@
+import Controller.BillController;
 import Controller.TicketController;
+import DTO.IssueBillRequest;
+import DTO.IssueBillResponse;
 import DTO.IssueTicketRequest;
 import DTO.IssueTicketResponse;
+import Services.BillService;
 import Services.TokenService;
 import models.*;
 import repo.*;
@@ -126,14 +130,19 @@ public class Main {
         }
 
         // BILL GENERATE..
-//        Bill b1 = new Bill();
-//        b1.setExitDate(new Date());
-//        b1.setExitedAt(g2);
-//        b1.setBillStatus(BillStatus.PENDING);
-//        b1.setTotalAmount(100);
+        BillService billService = new BillService(gr,
+                vr,sr,parkingLotRepo,ticketRepo);
+        BillController billController = new BillController(billService);
+        IssueBillRequest issueBillRequest = new IssueBillRequest();
+        issueBillRequest.setGateNumber(1);
+        issueBillRequest.setTicketNumber(1);
 
-
-
+        IssueBillResponse issueBillResponse = billController.IssueBill(issueBillRequest);
+        if( issueBillResponse != null ){
+            System.out.println(issueBillResponse.getBill().getTotalAmount());
+            issueBillResponse.getBill().setTotalAmount(150);
+            System.out.println(issueBillResponse.getBill().getTotalAmount());
+        }
 
     }
 }

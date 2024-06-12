@@ -15,10 +15,10 @@ public class BillService {
     private TicketRepo ticketRepo;
     private VehicleRepo vehicleRepo;
 
-    public BillService(GateRepo gateRepo, ParkingLotRepo parkingLotRepo,
-                       SlotRepo slotRepo, TicketRepo ticketRepo,
-                       VehicleRepo vehicleRepo) {
-        this.gateRepo = gateRepo;
+    public BillService(GateRepo gr, VehicleRepo vehicleRepo,
+                       SlotRepo slotRepo, ParkingLotRepo parkingLotRepo,
+                       TicketRepo ticketRepo) {
+        this.gateRepo = gr;
         this.parkingLotRepo = parkingLotRepo;
         this.slotRepo = slotRepo;
         this.ticketRepo = ticketRepo;
