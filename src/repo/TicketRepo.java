@@ -4,6 +4,7 @@ import models.Ticket;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class TicketRepo {
     int previousId = -1;
@@ -17,6 +18,11 @@ public class TicketRepo {
         return t;
     }
 
-
+    public Optional<Ticket> findById(int id){
+        if( ticketMap.containsKey(id) ){
+            return Optional.of(ticketMap.get(id));
+        }
+        return Optional.empty();
+    }
 
 }
