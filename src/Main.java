@@ -9,6 +9,8 @@ import Services.TokenService;
 import models.*;
 import repo.*;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -140,9 +142,35 @@ public class Main {
         IssueBillResponse issueBillResponse = billController.IssueBill(issueBillRequest);
         if( issueBillResponse != null ){
             System.out.println(issueBillResponse.getBill().getTotalAmount());
-            issueBillResponse.getBill().setTotalAmount(150);
-            System.out.println(issueBillResponse.getBill().getTotalAmount());
         }
 
+        System.out.println("Please proceed with payment.");
+        Bill b1 = issueBillResponse.getBill();
+        b1.setPayments(new ArrayList<>());
+
+        Payment pay1 = new Payment();
+        pay1.setAmount(70);
+        pay1.setBill(b1);
+        pay1.setPaymentModes(PaymentModes.CASH);
+        pay1.setRefID("101");
+        pay1.setPaymentStatus(PaymentStatus.SUCCESS);
+
+        if( pay1.getPaymentStatus().equals(PaymentStatus.SUCCESS) ){
+            b1.setTotalAmount(b1.getTotalAmount() - pay1.getAmount());
+            b1.getPayments().add(pay1);
+        }
+        System.out.println("Pending amount is "+b1.getTotalAmount()+" Payment mode "+b1.getPayments().get(0).getPaymentModes());
+
+        Payment pay2 = new Payment();
+        pay2.setAmount(30);
+        pay2.setBill(b1);
+        pay2.setPaymentModes(PaymentModes.UPI);
+        pay2.setRefID("102");
+        pay2.setPaymentStatus(PaymentStatus.SUCCESS);
+        if( pay2.getPaymentStatus().equals(PaymentStatus.SUCCESS) ){
+            b1.setTotalAmount(b1.getTotalAmount() - pay2.getAmount());
+            b1.getPayments().add(pay2);
+        }
+        System.out.println("Pending amount is "+b1.getTotalAmount()+" Payment mode "+b1.getPayments().get(1).getPaymentModes());
     }
 }
