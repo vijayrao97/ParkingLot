@@ -72,7 +72,7 @@ public class Main {
         ParkingLot p1 = new ParkingLot();
         p1.setId(1);
         p1.setAddress("Dadar");
-        p1.setCapacity(100);
+        p1.setCapacity(2);
         p1.setFloors(List.of(f1));
         p1.setGates(List.of(g1,g2));
         p1.setName("Carpark");
@@ -92,7 +92,7 @@ public class Main {
 
         TicketController ticketController = new TicketController(tokenService);
 
-
+        System.out.println("Capacity : "+p1.getCapacity());
         IssueTicketRequest request = new IssueTicketRequest();
 
         request.setGateId(1);
@@ -159,10 +159,12 @@ public class Main {
             b1.setTotalAmount(b1.getTotalAmount() - pay1.getAmount());
             b1.getPayments().add(pay1);
         }
-        System.out.println("Pending amount is "+b1.getTotalAmount()+" Payment mode "+b1.getPayments().get(0).getPaymentModes());
+        System.out.println("Pending amount is "+b1.getTotalAmount()
+                +" Payment via "+b1.getPayments().get(0).getPaymentModes()
+                +" is "+b1.getPayments().get(0).getAmount());
 
         Payment pay2 = new Payment();
-        pay2.setAmount(30);
+        pay2.setAmount(10);
         pay2.setBill(b1);
         pay2.setPaymentModes(PaymentModes.UPI);
         pay2.setRefID("102");
@@ -171,6 +173,16 @@ public class Main {
             b1.setTotalAmount(b1.getTotalAmount() - pay2.getAmount());
             b1.getPayments().add(pay2);
         }
-        System.out.println("Pending amount is "+b1.getTotalAmount()+" Payment mode "+b1.getPayments().get(1).getPaymentModes());
+        System.out.println("Pending amount is "+b1.getTotalAmount()
+                +" Payment via "+b1.getPayments().get(1).getPaymentModes()
+                +" is "+b1.getPayments().get(1).getAmount());
+
+        if( b1.getTotalAmount() == 0 ){
+            b1.setBillStatus(BillStatus.PAID);
+            Slot s = b1.getToken().getSlot();
+            s.setSlotStatus(SlotStatus.EMPTY);
+            parkingLotRepo.updateCountByIdIncrement(p1);
+        }
+        System.out.println("Capacity : "+p1.getCapacity());
     }
 }

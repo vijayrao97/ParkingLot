@@ -61,7 +61,7 @@ public class TokenService {
 //        System.out.println("Working fine2.");
 
         if( slotOptional.isEmpty() ){
-            System.out.println("Working fine.");
+//            System.out.println("Working fine.");
             throw new RuntimeException("No empty slot available");
         }
         Slot s  = slotOptional.get();

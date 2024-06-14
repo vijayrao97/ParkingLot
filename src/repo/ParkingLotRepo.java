@@ -14,6 +14,11 @@ public class ParkingLotRepo {
         return p;
     }
 
+    public ParkingLot updateCountByIdIncrement(ParkingLot p){
+        p.setCapacity(p.getCapacity()+1);
+        return p;
+    }
+
     public ParkingLot saveParkingLot(ParkingLot p){
         int newId = preInsertedId+1;
         p.setId(newId);
